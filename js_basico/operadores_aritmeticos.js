@@ -26,3 +26,60 @@ h) Se M for maior que 40: Obesidade grau III
 <classificacao>.”
 *As informações em vermelho são variáveis e devem ser substituídas pelos seus respectivos valores calculadas dentro da aplicação.
 */
+
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+let nome,
+  altura,
+  peso,
+  mensagem;
+
+rl.question('Qual o seu nome? ', (n) => {
+  nome = n;
+
+});
+
+rl.question('Qual a sua altura? ', (a) => {
+  altura = a.replace(/\D/g, '') || 0;
+  altura = parseFloat(altura) / 100
+
+});
+
+rl.question('Qual o seu peso? ', (p) => {
+  peso = p.replace(/\D/g, '') || 0;
+
+  const imc = peso / (altura * altura)
+
+  if (imc < 16) {
+    mensagem = 'Baixo peso muito grave';
+  } else if (imc < 17) {
+    mensagem = 'Baixo peso grave';
+  } else if (imc < 18.5) {
+    mensagem = 'Baixo peso';
+  } else if (imc < 25) {
+    mensagem = 'Peso normal';
+
+  } else if (imc < 30) {
+    mensagem = 'Sobrepeso';
+
+  } else if (imc < 35) {
+    mensagem = 'Obesidade grau I';
+
+  } else if (imc < 40) {
+    mensagem = 'Obesidade grau II';
+
+  } else {
+    mensagem = 'Obesidade grau III';
+
+  }
+
+  console.log(`${nome} possui índice de massa corporal igual a ${imc}, sendo classificado como:
+${mensagem}.`)
+
+  rl.close();
+});
